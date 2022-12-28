@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 164118647}
   - component: {fileID: 164118646}
+  - component: {fileID: 164118648}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: EditorOnly
@@ -150,25 +151,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a0936aff70c25408f35fd2c088b006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightingPreset:
-  - horizontal: 120
-    vertical: 50
-  - horizontal: 0
-    vertical: 15
-  - horizontal: 90
-    vertical: 0
+  cameraHeight: 1
+  cameraDistance: 1
+  cameraDropdown: 0
+  directLightHorizontal: 120
+  directLightVertical: 50
+  postToggle: 1
+  postDropdown: 0
+  thumbnailTexture: {fileID: 2800000, guid: b36b3dd83c8317d478450a61ac7701c5, type: 3}
+  internalSettingsWarning: 0
   cameraParentObject: {fileID: 1409667018}
   directLightObject: {fileID: 514919380}
   postParentObject: {fileID: 225756816}
-  ThumbnailObject: {fileID: 1080912098}
+  thumbnailObject: {fileID: 1080912098}
   postObjects:
   - {fileID: 1142511012}
   - {fileID: 221795044}
   - {fileID: 1976980149}
-  postProfiles:
-  - {fileID: 11400000, guid: e8ecf0f2f81223e4f85cf0f835b52e8c, type: 2}
-  - {fileID: 11400000, guid: 9a82349101a76a943b02319ca1c9052a, type: 2}
-  - {fileID: 11400000, guid: 04ef2202044b99b47a246349b53f88d0, type: 2}
   cameraObjects:
   - {fileID: 1462796191}
   - {fileID: 1563944638}
@@ -194,6 +193,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &164118648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164118645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69909f591422ad24aa5e985d7416fcc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneController: {fileID: 164118646}
+  lightingPreset:
+  - horizontal: 120
+    vertical: 50
+  - horizontal: 0
+    vertical: 15
+  - horizontal: 90
+    vertical: 0
+  postProfiles:
+  - {fileID: 11400000, guid: e8ecf0f2f81223e4f85cf0f835b52e8c, type: 2}
+  - {fileID: 11400000, guid: 9a82349101a76a943b02319ca1c9052a, type: 2}
+  - {fileID: 11400000, guid: 04ef2202044b99b47a246349b53f88d0, type: 2}
 --- !u!1 &167849357
 GameObject:
   m_ObjectHideFlags: 0

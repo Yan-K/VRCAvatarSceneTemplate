@@ -16,20 +16,20 @@ Made VRChat Avatar creation and testing easier
 
 - [x] Add undo for slider
 
-- [ ] Implement NaughtyAttributes (maybe?)
+- [x] Implement NaughtyAttributes (maybe?)
 
 ## Features
 
-👉Camera Control <br>
+Camera Control <br>
 Quickly switching preview angle, also moveable in Play Mode, great for Phys Bone testing.
 
-👉Lighting Control <br>
+Lighting Control <br>
 Testing material look more efficiently.
 
-👉Post Processing Control <br>
+Post Processing Control <br>
 Switch different Post Processing profile faster, works great with [Lightbox Viewer by hai-vr](https://github.com/hai-vr/lightbox-viewer).
 
-👉Thumbnail Panel <br>
+Thumbnail Panel <br>
 Change thumbnail for upload.
 
 ## Installation
@@ -44,7 +44,27 @@ Change thumbnail for upload.
 
 ## Changelog
 
-v1.0 - 2022/12/27
+## v1.1 - 2022/12/28
+
+### Added
+
+- Implemented NaughtyAttributes
+
+- Undo for slider
+
+- Shadow control
+
+- More lighting control
+
+- Multiple light source for material testing
+
+### Changed
+
+- Changed floor texture
+
+## v1.0 - 2022/12/27
+
+Inital Release.
 
 ## Credit
 
@@ -54,3 +74,4 @@ v1.0 - 2022/12/27
 ## Third-Party
 
 - [Free Fly Camera by Sergey Stafeev](https://assetstore.unity.com/packages/tools/camera/free-fly-camera-140739)
+- [NaughtyAttributes](https://github.com/dbrizov/NaughtyAttributes)

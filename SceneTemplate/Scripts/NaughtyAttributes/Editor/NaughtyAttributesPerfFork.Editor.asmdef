@@ -1,0 +1,18 @@
+{
+    "name": "NaughtyAttributesPerfFork.Editor",
+    "rootNamespace": "",
+    "references": [
+        "NaughtyAttributesPerfFork.Core"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
