@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
 using NaughtyAttributes;
 
@@ -17,11 +18,13 @@ public class SceneController : MonoBehaviour
 
 	// ----------------- Camera Settings
 	[HorizontalLine(color: EColor.Gray)]
-	[Range(0.1f, 3f)]
+	[OnValueChanged("OnCameraScaleChanged")]
+	[Range(0.1f, 3.0f)]
 	[SerializeField]
 	internal float cameraHeight = 1.0f;
 	
-	[Range(0.1f, 3f)]
+	[OnValueChanged("OnCameraScaleChanged")]
+	[Range(0.1f, 3.0f)]
 	[SerializeField]
 	internal float cameraDistance = 1.0f;
 	
@@ -35,15 +38,37 @@ public class SceneController : MonoBehaviour
 	[HorizontalLine(color: EColor.Gray)]
 	[OnValueChanged("OnLightingRotationChanged")]
 	[Label("Lighting Horizontal")]
-	[Range(-180.0f, 180f)]
+	[Range(-180.0f, 180.0f)]
 	[SerializeField]
 	internal float directLightHorizontal = 120.0f;
 	
 	[OnValueChanged("OnLightingRotationChanged")]
 	[Label("Lighting Vertical")]
-	[Range(-180.0f, 180f)]
+	[Range(-180.0f, 180.0f)]
 	[SerializeField]
 	internal float directLightVertical = 50.0f;
+	
+	[OnValueChanged("OnLightingIntensityChanged")]
+	[Label("Brightness")]
+	[Range(0.0f, 3.0f)]
+	[SerializeField]
+	internal float directLightIntensity = 1.0f;
+	
+	[OnValueChanged("OnShadowStrengthChanged")]
+	[Label("Shadow")]
+	[Range(0.0f, 1.0f)]
+	[SerializeField]
+	internal float shadowIntensity = 0.8f;
+	
+	[OnValueChanged("OnLightingColorChanged")]
+	[Label("Lighting Color")]
+	[SerializeField]
+	internal Color directLightColor = Color.white;
+	
+	[OnValueChanged("OnAmbientColorChanged")]
+	[Label("Ambient Color")]
+	[SerializeField]
+	internal Color ambientColor = new Color(0.19f, 0.19f, 0.19f, 1.0f);
 	
 	// ----------------- Post Processing Settings
 	[HorizontalLine(color: EColor.Gray)]
@@ -58,9 +83,9 @@ public class SceneController : MonoBehaviour
 	[SerializeField]
 	internal int postDropdown;
 	
-	
 	// ----------------- Thumbnail Settings
 	[HorizontalLine(color: EColor.Gray)]
+	[OnValueChanged("OnThumbnialTextureChanged")]
 	[ShowAssetPreview(128, 128)]
 	[SerializeField]
 	internal Texture thumbnailTexture;
@@ -75,6 +100,10 @@ public class SceneController : MonoBehaviour
 	[ShowIf("internalSettingsWarning")]
 	[SerializeField]
 	internal GameObject cameraParentObject;
+	
+	[ShowIf("internalSettingsWarning")]
+	[SerializeField]
+	internal GameObject cameraObject;
 
 	[ShowIf("internalSettingsWarning")]
 	[SerializeField]
@@ -96,6 +125,33 @@ public class SceneController : MonoBehaviour
 	[SerializeField]
 	internal GameObject[] cameraObjects;
 	
+	// ----------------- Reset
+	[Button]
+	internal void ResetCameraSettings()
+	{
+		cameraHeight = 1.0f;
+		cameraDistance = 1.0f;
+		cameraDropdown = 0;
+		OnCameraScaleChanged();
+		OnCameraSwitch();
+	}
+	
+	[Button]
+	internal void ResetLightingSettings()
+	{
+		directLightHorizontal = 120.0f;
+		directLightVertical = 50.0f;
+		directLightIntensity = 1.0f;
+		shadowIntensity = 0.8f;
+		directLightColor = Color.white;
+		ambientColor = new Color(0.19f, 0.19f, 0.19f, 1.0f);
+		OnLightingRotationChanged();
+		OnLightingIntensityChanged();
+		OnLightingColorChanged();
+		OnShadowStrengthChanged();
+		OnAmbientColorChanged();
+	}
+	
 	// ----------------- Generic Function
 	internal void ToggleObjects(GameObject[] targets, int index)
 	{
@@ -105,17 +161,31 @@ public class SceneController : MonoBehaviour
 	
 	internal void OnCameraSwitch()
 	{
+		Undo.RecordObjects(cameraObjects, "Camera Switch");
 		ToggleObjects(cameraObjects, cameraDropdown);
 	}
 	
 	internal void OnPostSwitch()
 	{
+		Undo.RecordObjects(postObjects, "Post Processing Switch");
 		ToggleObjects(postObjects, postDropdown);
 	}
 	
 	internal void OnPostToggle()
 	{
+		Undo.RecordObject(postParentObject, "Post Processing Toggle");
 		postParentObject.SetActive(postToggle);
+	}
+	
+	internal void OnCameraScaleChanged()
+	{
+		var newScale = new Vector3 (1.0f, 1.0f, 1.0f);
+		newScale.x = cameraDistance;
+		newScale.z = cameraDistance;
+		newScale.y = cameraHeight;
+		
+		Undo.RecordObject(cameraParentObject.transform, "Camera Position");
+		cameraParentObject.transform.localScale = newScale;
 	}
 	
 	internal void OnLightingRotationChanged()
@@ -125,18 +195,56 @@ public class SceneController : MonoBehaviour
 		rotation.y = directLightHorizontal;
 		rotation.z = 0.0f;
 		
+		Undo.RecordObject(directLightObject.transform, "Lighting Rotation");
 		directLightObject.transform.localEulerAngles = rotation;
 	}
 	
+	internal void OnLightingIntensityChanged()
+	{
+		Light target = directLightObject.GetComponent<Light>();
+		
+		Undo.RecordObject(target, "Lighting Settings");
+		target.intensity = directLightIntensity;
+	}
+	
+	internal void OnLightingColorChanged()
+	{
+		Light target = directLightObject.GetComponent<Light>();
+		
+		Undo.RecordObject(target, "Lighting Settings");
+		target.color = directLightColor;
+	}
+	
+	internal void OnShadowStrengthChanged()
+	{
+		Light target = directLightObject.GetComponent<Light>();
+		
+		Undo.RecordObject(target, "Shadow Settings");
+		target.shadowStrength = shadowIntensity;
+	}
+	
+	internal void OnAmbientColorChanged()
+	{
+		Camera targetBackground = cameraObject.GetComponent<Camera>();
+		
+		Undo.RecordObject(targetBackground, "Ambient Settings");
+		targetBackground.backgroundColor = ambientColor;
+		RenderSettings.ambientLight = ambientColor;
+	}
+	
+	internal void OnThumbnialTextureChanged()
+	{
+		thumbnailObject.GetComponent<Renderer>().sharedMaterial.SetTexture("_MainTex", thumbnailTexture);
+	}
 	
 	// ----------------- Fields
 	internal DropdownList<int> CameraList()
 	{
 		return new DropdownList<int>()
 		{
-			{"Face01", 0}, {"Face02", 1}, {"Face03", 2},
-			{"Body01", 3}, {"Body02", 4}, {"Body03", 5}, {"Body04", 6},
-			{"Back01", 7}, {"Back02", 8}, {"Back03", 9}
+			{"Face 01", 0}, {"Face 02", 1}, {"Face 03", 2},
+			{"Body 01", 3}, {"Body 02", 4}, {"Body 03", 5}, {"Body 04", 6},
+			{"Back 01", 7}, {"Back 02", 8}, {"Back 03", 9}
 		};
 	}
 	
@@ -144,7 +252,7 @@ public class SceneController : MonoBehaviour
 	{
 		return new DropdownList<int>()
 		{
-			{"Post01", 0}, {"Post02", 1}, {"Post03", 2},
+			{"Post 01", 0}, {"Post 02", 1}, {"Post 03", 2},
 		};
 	}
 

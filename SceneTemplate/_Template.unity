@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_AmbientSkyColor: {r: 0.19, g: 0.19, b: 0.19, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -156,11 +156,16 @@ MonoBehaviour:
   cameraDropdown: 0
   directLightHorizontal: 120
   directLightVertical: 50
+  directLightIntensity: 1
+  shadowIntensity: 0.8
+  directLightColor: {r: 1, g: 1, b: 1, a: 1}
+  ambientColor: {r: 0.19, g: 0.19, b: 0.19, a: 1}
   postToggle: 1
   postDropdown: 0
   thumbnailTexture: {fileID: 2800000, guid: b36b3dd83c8317d478450a61ac7701c5, type: 3}
   internalSettingsWarning: 0
   cameraParentObject: {fileID: 1409667018}
+  cameraObject: {fileID: 1761059475}
   directLightObject: {fileID: 514919380}
   postParentObject: {fileID: 225756816}
   thumbnailObject: {fileID: 1080912098}
@@ -2065,7 +2070,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_BackGroundColor: {r: 0.19, g: 0.19, b: 0.19, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

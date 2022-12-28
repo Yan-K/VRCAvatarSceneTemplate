@@ -4,20 +4,6 @@ Made VRChat Avatar creation and testing easier
 
 ![Demo](https://i.imgur.com/mocsdzG.gif)
 
-## TODO BEFORE REPO GOES PUBLIC
-
-- [x] Change floor texture
-
-- [ ] Add shadow color control (both shadow color and shadow strength)
-
-- [ ] Add direct light control (color, intensity)
-
-- [ ] Add floating point light
-
-- [x] Add undo for slider
-
-- [x] Implement NaughtyAttributes (maybe?)
-
 ## Features
 
 Camera Control <br>
@@ -44,7 +30,7 @@ Change thumbnail for upload.
 
 ## Changelog
 
-## v1.1 - 2022/12/28
+### v1.1 - 2022/12/28
 
 ### Added
 
@@ -62,7 +48,7 @@ Change thumbnail for upload.
 
 - Changed floor texture
 
-## v1.0 - 2022/12/27
+### v1.0 - 2022/12/27
 
 Inital Release.
 
