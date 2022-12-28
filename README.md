@@ -4,18 +4,32 @@ Made VRChat Avatar creation and testing easier
 
 ![Demo](https://i.imgur.com/mocsdzG.gif)
 
+## TODO BEFORE REPO GOES PUBLIC
+
+- [x] Change floor texture
+
+- [ ] Add shadow color control (both shadow color and shadow strength)
+
+- [ ] Add direct light control (color, intensity)
+
+- [ ] Add floating point light
+
+- [x] Add undo for slider
+
+- [ ] Implement NaughtyAttributes (maybe?)
+
 ## Features
 
-👉Camera Control
+👉Camera Control <br>
 Quickly switching preview angle, also moveable in Play Mode, great for Phys Bone testing.
 
-👉Lighting Control
+👉Lighting Control <br>
 Testing material look more efficiently.
 
-👉Post Processing Control
+👉Post Processing Control <br>
 Switch different Post Processing profile faster, works great with [Lightbox Viewer by hai-vr](https://github.com/hai-vr/lightbox-viewer).
 
-👉Thumbnail Panel
+👉Thumbnail Panel <br>
 Change thumbnail for upload.
 
 ## Installation

@@ -108,6 +108,8 @@ public class SceneCameraControllerEditor : Editor {
 		
 		EditorGUI.BeginChangeCheck();
 		
+		Undo.RecordObject(cameraParentTransform, "Change Camera Position");
+		
 		scale.y = EditorGUILayout.Slider("Camera Height", scale.y, 0.1F, 3F);
 		scale.z = EditorGUILayout.Slider("Camera Distance", (scale.x + scale.z) / 2F, 0.1F, 3F);
 		scale.x = scale.z;
@@ -134,11 +136,13 @@ public class SceneCameraControllerEditor : Editor {
 			EditorGUILayout.HelpBox("Lighting object is missing", MessageType.Error);
 			return;
 		}
-		
+
 		var directLightTransform = directLight.transform;
 		var rotation = directLightTransform.eulerAngles;
 		
 		EditorGUI.BeginChangeCheck();
+		
+		Undo.RecordObject(directLightTransform, "Change Lighting Rotation");
 		
 		rotation.y = EditorGUILayout.Slider("Lighting Horizontal", Mathf.Repeat(rotation.y + 180F, 360F) - 180F, -180F, 180F);
 		rotation.x = EditorGUILayout.Slider("Lighting Vertical", Mathf.Repeat(rotation.x + 180F, 360F) - 180F, -180F, 180F);
@@ -166,9 +170,9 @@ public class SceneCameraControllerEditor : Editor {
 			EditorGUILayout.PropertyField(verticalField);
 			if (GUILayout.Button("Use Preset"))
 				target.directLightObject.transform.eulerAngles = new Vector3(
-					verticalField.floatValue,
-					horizontalField.floatValue,
-					0
+				verticalField.floatValue,
+				horizontalField.floatValue,
+				0
 				);
 			EditorGUILayout.EndVertical();
 			EditorGUIUtility.labelWidth = 0.0f;
