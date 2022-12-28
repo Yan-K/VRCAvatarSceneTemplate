@@ -30,7 +30,13 @@ Change thumbnail for upload.
 
 ## Changelog
 
-### v1.1 - 2022/12/28
+### v1.1.1 - 2022/12/28
+
+### Changed
+
+- Changed folder structure
+
+### v1.1.0 - 2022/12/28
 
 ### Added
 
@@ -48,7 +54,7 @@ Change thumbnail for upload.
 
 - Changed floor texture
 
-### v1.0 - 2022/12/27
+### v1.0.0 - 2022/12/27
 
 Inital Release.
 
