@@ -1,3 +1,7 @@
+# DEPRECATED
+
+This template is deprecated, use [Scene Controller in Yan-K Avatar Toolbox](https://github.com/Yan-K/AvatarToolbox) instead.
+
 # Avatar Scene Template
 
 Made VRChat Avatar creation and testing easier
